@@ -1,12 +1,22 @@
-.containerPrincipal{
-    min-width: 100vw;
-    min-height: 100vh;
+.containerPrincipalDay{
+    width: 100vw;
+    height: 100vh;
     background-color: rgb(63, 192, 235);
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    gap: 100px;
+    gap: 20px;
+}
+.containerPrincipalNight{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(16, 44, 89);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
 }
 .header{
     width: 550px;
@@ -31,22 +41,43 @@
     background-color: azure;
     cursor: pointer;
 }
+.title{
+    width: 100%;
+    font-size: 30px;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+}
+.sun{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: yellow;
+    border-radius: 100%;
+}
+.moon span{
+    font-size: 40px;
+    color: white;
+}
 .data{
-    background-color: rgb(75, 75, 75);
     padding: 10px;
     height: 100%;
     display: flex;
     flex-direction: column;
-    min-width: 550px;
     color: white;
     border-radius: 10px;
     gap: 10px;
+    width: 100%;
 }
 .actuallyTemp{
-    
     padding: 10px;
     font-size: 40px;
-    margin-left: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 .datum{
     background-color: rgb(99, 99, 99);
@@ -56,10 +87,35 @@
     border-radius: 10px;
     padding: 10px;
     font-size: 20px;
+    color: white;
 }
 .title{
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px;
+}
+
+@media (max-width : 800px) {
+    .containerPrincipalDay{
+        width: 100%;
+    }
+    .containerPrincipalNight{
+        width: 100%;
+    }
+    .header{
+        width: 100%;
+    }
+    .title{
+        width: 72%;
+        font-size: 20px;
+        
+    }
+    .existWeather{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
 }
