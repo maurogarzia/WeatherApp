@@ -1,22 +1,10 @@
-.containerPrincipalDay{
-    width: 100vw;
-    height: 100vh;
-    background-color: rgb(63, 192, 235);
+.containerPrincipal{
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
     gap: 20px;
-}
-.containerPrincipalNight{
-    width: 100vw;
-    height: 100vh;
-    background-color: rgb(16, 44, 89);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    gap: 20px;
+    min-height: 100vh;
 }
 .header{
     width: 550px;
@@ -42,11 +30,27 @@
     cursor: pointer;
 }
 .title{
-    width: 100%;
-    font-size: 30px;
     background-color: white;
-    color: black;
     border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-size: 40px;
+    gap: 5px;
+    width: 100%;
+}
+.title h2{
+    width: 100%;
+}
+.title a{
+    color: red;
+}
+.location{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
 .sun{
     display: flex;
@@ -57,19 +61,25 @@
     background-color: yellow;
     border-radius: 100%;
 }
+.moon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    
+}
 .moon span{
-    font-size: 40px;
+    font-size: 50px;
     color: white;
 }
 .data{
-    padding: 10px;
-    height: 100%;
+    padding: 5px;
     display: flex;
     flex-direction: column;
-    color: white;
     border-radius: 10px;
     gap: 10px;
     width: 100%;
+    color: white;
 }
 .actuallyTemp{
     padding: 10px;
@@ -80,19 +90,19 @@
     flex-direction: column;
 }
 .datum{
-    background-color: rgb(99, 99, 99);
+    background-color: white;
+    color: black;
     display: flex;
     flex-direction: column;
     gap: 10px;
     border-radius: 10px;
     padding: 10px;
     font-size: 20px;
-    color: white;
 }
-.title{
+.containerData{
     display: flex;
-    justify-content: center;
     align-items: center;
+    gap: 10px;
     padding: 10px;
 }
 
@@ -107,9 +117,10 @@
         width: 100%;
     }
     .title{
-        width: 72%;
-        font-size: 20px;
-        
+        width: 100%;
+        font-size: 30px;
+        display: flex;
+        gap: 10px;
     }
     .existWeather{
         display: flex;
@@ -118,4 +129,14 @@
         justify-content: center;
         width: 100%;
     }
+    .actuallyTemp{
+        font-size: 35px;
+    }
+    .containerData{
+        font-size: 20px;
+    }
+    .containerData span{
+        font-size: 20px;
+    }
+    
 }

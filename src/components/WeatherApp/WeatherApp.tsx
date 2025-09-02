@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import style from './WeatherApp.module.css'
 import { formatLocalDate, formatLocalTime } from '../../utils/getLocalTime'
+import { setTime } from '../../utils/setTime'
+import { capitalize } from '../../utils/capitalize'
 
 export const WeatherApp = () => {
 
@@ -8,24 +10,17 @@ export const WeatherApp = () => {
     const [city, setCity] = useState<string>('') // Input de la ciudad
     const [weather, setWeather] = useState<any>(null) // Objeto weather
 
-
     // Estado que controlara el fondo de la aplicacion
     const [temp, setTemp] = useState<string>('day')
 
-    
     useEffect(() => {
 
         if (!weather) return 
 
-        const isDay = weather.dt > weather.sys.sunrise && weather.dt < weather.sys.sunset
+        const isDay = weather.dt > weather.sys.sunrise && weather.dt < weather.sys.sunset // Calculo horario del amanecer y anochecer
         setTemp(isDay ? 'day' : 'night')
 
     },[weather])
-
-    // Funcion para que el texto devuelva la primer letra en mayuscula
-    const capitalize = (text : string) => {
-        return text.charAt(0).toUpperCase() + text.slice(1)
-    }
     
     const fetched = async() => {
         if (!city) return
@@ -50,9 +45,14 @@ export const WeatherApp = () => {
             
         }
     }
+
+    const {backgroundColor, climate} = weather ? setTime(weather.weather[0].description, temp) : {backgroundColor: '#00d5ff', climate: ''}
+    
     
     return (
-        <div className={temp === 'day' ? style.containerPrincipalDay : style.containerPrincipalNight}>
+        <div className={style.containerPrincipal}  
+        style={{ backgroundColor}}>
+
             <header className={style.header}>
                 <input type="text" name="city" value={city} placeholder='Ingrese ciudad...' onChange={(e) => setCity(e.target.value)}/>
 
@@ -67,25 +67,65 @@ export const WeatherApp = () => {
                 <div className={style.existWeather}>
 
                     <div style={{"width" : "100%", "display" : "flex", "gap" : "10px", "flexDirection" : "column", "justifyContent" : "center", "alignItems" : 'center'}}>
-                        <div className={style.title}>
-                            <h2>{weather.name} ({weather.sys.country})</h2>
-                        </div>
-                        {temp === 'day' ? 
-                            <div className={style.sun}>
-                                {/* Sol que se refleja */}
-                            </div>
-
-                            : 
-
-                            <div className={style.moon}>
-                                {/* Luna que se refleja */}
-                                <span className="material-symbols-outlined">
-                                    moon_stars
-                                </span>
-                            </div>
                         
-                        }
+                        
+                        <h2 className={style.title}>
+                            {weather.name}
+                            ({weather.sys.country})
+                            
+                            <a className={style.location} href={`https://www.google.com/maps?q=${weather.coord.lat},${weather.coord.lon}`} target='blank'>
+                                <span className="material-symbols-outlined">location_on</span>
+                            </a>
+                        </h2>
+                        
+
+                    {/* Despejado */}
+                    {climate === 'diaDespejado' && <div className={style.sun}></div>}
+                    {climate === 'nocheDespejada' && 
+                        <div className={style.moon}>
+                            <span className="material-symbols-outlined">moon_stars</span>
+                        </div>
+                    }
+
+                    {/* NUblado */}
+                    {climate === 'diaNublado' && 
+                        <div className={style.moon}>
+                            <span className="material-symbols-outlined">partly_cloudy_day</span>
+                        </div>
+                    }
+                    {climate === 'nocheNublada' && 
+                        <div className={style.moon}>
+                            <span className="material-symbols-outlined">partly_cloudy_night</span>
+                        </div>
+                    }
+
+                    {/* Lluvioso */}
+                    {climate === 'lluvioso' && 
+                        <div className={style.moon}>
+                            <span className="material-symbols-outlined">rainy_heavy</span>
+                        </div>
+                    }
+
+                    {/* Niebla */}
+                    {climate === 'niebla' && 
+                        <div className={style.moon}>
+                            <span className="material-symbols-outlined">foggy</span>
+                        </div>
+                    }
+
+                    {/* Nieve */}
+                    {climate === 'nieve'}
+                        {/* <div className={style.moon}>
+                            <span className="material-symbols-outlined">ac_unit</span>
+                        </div> */}
                     </div>
+
+                    {/* Tormenta */}
+                    {climate === 'tormenta' &&
+                        <div className={style.moon}>
+                            <span className="material-symbols-outlined">rainy</span>
+                        </div>
+                    }
 
                     <div className={style.data}>
 
@@ -97,11 +137,51 @@ export const WeatherApp = () => {
 
                         <div className={style.datum}>
                             
-                            <p>Sensación térmica: {weather.main.feels_like}°</p>
-                            <p>Mínima: {weather.main.temp_min}°</p>
-                            <p>Máxima: {weather.main.temp_max}°</p>
-                            <p>Humedad: {weather.main.humidity}%</p>
-                            <p>Presión atmosférica: {weather.main.pressure}</p>
+                            <div className={style.containerData}>
+                                <span className="material-symbols-outlined">thermometer</span>
+                                <p>Sensación térmica</p>
+                                <p>{weather.main.feels_like}°</p>
+                            </div>
+
+                            <hr />
+
+                            <div className={style.containerData}>  
+                                <span className="material-symbols-outlined">thermometer_minus</span>
+                                <p>Mínima</p>                              
+                                <p>{weather.main.temp_min}°</p>
+                            </div>
+
+                            <hr />
+
+                            <div className={style.containerData}>
+                                <span className="material-symbols-outlined">thermometer_add</span>
+                                <p>Máxima</p>
+                                <p>{weather.main.temp_max}°</p>
+                            </div>
+
+                            <hr />
+
+                            <div className={style.containerData}>
+                                <span className="material-symbols-outlined">humidity_low</span>
+                                <p>Humedad</p>
+                                <p>{weather.main.humidity}%</p>
+                            </div>
+
+                            <hr />
+
+                            <div className={style.containerData}>
+                                <span className="material-symbols-outlined">compress</span>
+                                <p>Presión atmosférica</p>
+                                <p>{weather.main.pressure} mb</p>
+                            </div>
+
+                            <hr />
+
+                            <div className={style.containerData}>
+                                <span className="material-symbols-outlined">air</span>
+                                <p>Viento</p>
+                                <p>{weather.wind.speed} m/s</p>
+                            </div>
                         </div>
                     </div>    
                 </div>
