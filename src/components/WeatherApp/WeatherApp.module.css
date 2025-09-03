@@ -61,14 +61,14 @@
     background-color: yellow;
     border-radius: 100%;
 }
-.moon{
+.icon{
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
     
 }
-.moon span{
+.icon span{
     font-size: 50px;
     color: white;
 }

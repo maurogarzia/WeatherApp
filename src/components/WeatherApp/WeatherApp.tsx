@@ -104,47 +104,49 @@ export const WeatherApp = () => {
                     {/* Despejado */}
                     {climate === 'diaDespejado' && <div className={style.sun}></div>}
                     {climate === 'nocheDespejada' && 
-                        <div className={style.moon}>
+                        <div className={style.icon}>
                             <span className="material-symbols-outlined">moon_stars</span>
                         </div>
                     }
 
                     {/* NUblado */}
                     {climate === 'diaNublado' && 
-                        <div className={style.moon}>
+                        <div className={style.icon}>
                             <span className="material-symbols-outlined">partly_cloudy_day</span>
                         </div>
                     }
                     {climate === 'nocheNublada' && 
-                        <div className={style.moon}>
+                        <div className={style.icon}>
                             <span className="material-symbols-outlined">partly_cloudy_night</span>
                         </div>
                     }
 
                     {/* Lluvioso */}
                     {climate === 'lluvioso' && 
-                        <div className={style.moon}>
+                        <div className={style.icon}>
                             <span className="material-symbols-outlined">rainy_heavy</span>
                         </div>
                     }
 
                     {/* Niebla */}
                     {climate === 'niebla' && 
-                        <div className={style.moon}>
+                        <div className={style.icon}>
                             <span className="material-symbols-outlined">foggy</span>
                         </div>
                     }
 
                     {/* Nieve */}
-                    {climate === 'nieve'}
-                        {/* <div className={style.moon}>
+                    {climate === 'nieve' &&
+                        <div className={style.icon}>
                             <span className="material-symbols-outlined">ac_unit</span>
-                        </div> */}
+                        </div>
+                    }
+                    
                     </div>
 
                     {/* Tormenta */}
                     {climate === 'tormenta' &&
-                        <div className={style.moon}>
+                        <div className={style.icon}>
                             <span className="material-symbols-outlined">rainy</span>
                         </div>
                     }

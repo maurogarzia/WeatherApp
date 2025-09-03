@@ -1,15 +1,15 @@
-import type { FC } from 'react'
+import { type FC } from 'react'
 import style from './ListForecast.module.css'
 
 
-interface IListForecast {
-    forecast : any[]
-}
 
+interface IListForecast {
+    forecast : any[],
+}
 
 export const ListForecast : FC<IListForecast> = ({forecast}) => {
 
-
+    
     return (
         <div className={style.containerPrincipal}>
             <div className={style.title}>
@@ -25,7 +25,48 @@ export const ListForecast : FC<IListForecast> = ({forecast}) => {
 
                         <div className={style.containerData}>
                             
-                            <p>{day.weather[0].description}</p>
+                            {/* despejado */}
+                            {day.weather[0].description.includes('claro') && 
+                                <div className={style.sun}></div>
+                            }
+
+                            {/* nublado */}
+                            {(day.weather[0].description.includes('nubes') || day.weather[0].description.includes('nuboso')) &&
+                                <div className={style.icon}>
+                                    <span className="material-symbols-outlined">partly_cloudy_day</span>
+                                </div>
+                            }
+
+                            {/* lluvioso */}
+                            {day.weather[0].description.includes('lluvia') && 
+                                <div className={style.icon}>
+                                    <span className="material-symbols-outlined">rainy_heavy</span>
+                                </div>
+                            }
+
+                            {/* Niebla */}
+                            {(day.weather[0].description.includes('niebla') || day.weather[0].description.includes('neblina')) && 
+                                <div className={style.icon}>
+                                    <span className="material-symbols-outlined">foggy</span>
+                                </div>
+                            }
+
+                            {/* Tormenta */}
+                            {day.weather[0].description.includes('tormenta') && 
+                                <div className={style.icon}>
+                                    <span className="material-symbols-outlined">rainy</span>
+                                </div>
+                            }
+
+                            {/* Nieve */}
+                            {day.weather[0].description.includes('nieve') &&
+                                <div className={style.icon}>
+                                    <span className="material-symbols-outlined">ac_unit</span>
+                                </div>
+                            }
+
+
+                            
                             <p>{Math.round(day.main.temp)}°</p>
                         </div>
 
