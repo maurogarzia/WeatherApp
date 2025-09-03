@@ -1,0 +1,67 @@
+.containerPrincipal{
+    width: 100%;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    min-height: 100px;
+    padding: 10px;
+}
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+.containerForecast{
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+}
+.forecast{
+    background-color: rgb(42, 40, 40);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 100px;
+    padding: 10px;
+    color: white;
+    gap: 10px;
+    height: 100%;
+
+}
+.containerDay{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    min-height: 20px;
+}
+.containerData{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 55px;
+}
+.containerHour{
+    height: 30px;
+}
+.sun{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    background-color: yellow;
+    border-radius: 100%;
+}
+.moon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 20px;
+    
+}

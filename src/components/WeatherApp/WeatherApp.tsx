@@ -3,12 +3,14 @@ import style from './WeatherApp.module.css'
 import { formatLocalDate, formatLocalTime } from '../../utils/getLocalTime'
 import { setTime } from '../../utils/setTime'
 import { capitalize } from '../../utils/capitalize'
+import { ListForecast } from '../ListForecast/ListForecast'
 
 export const WeatherApp = () => {
 
     const apiKey = import.meta.env.VITE_API_KEY // clave de la api
     const [city, setCity] = useState<string>('') // Input de la ciudad
     const [weather, setWeather] = useState<any>(null) // Objeto weather
+    const [forecast, setForecast] = useState<any[]>([]) 
 
     // Estado que controlara el fondo de la aplicacion
     const [temp, setTemp] = useState<string>('day')
@@ -21,6 +23,25 @@ export const WeatherApp = () => {
         setTemp(isDay ? 'day' : 'night')
 
     },[weather])
+
+    const fetchForecast = async() => {
+        try {
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric&lang=es`)
+            const data = await response.json()
+
+            if (data.cod != 200){
+                alert('No se pudo obtener el pronóstico')
+                console.log("error al obtener el pronostico");
+            }
+
+            const listForecast = data.list.filter((item : any) => item.dt_txt.includes("12:00:00"))
+            
+            setForecast(listForecast)
+        } catch (error) {
+            console.log("Ocurrió un error al ver el pronostico");
+            alert("Ocurrió un error al ver el pronostico")
+        }
+    }
     
     const fetched = async() => {
         if (!city) return
@@ -37,6 +58,7 @@ export const WeatherApp = () => {
             }
 
             setWeather(data)
+            fetchForecast() // Llamo al endpoint del pronostico
             
         } catch (error : any) {
             
@@ -134,6 +156,12 @@ export const WeatherApp = () => {
                             <p>{capitalize(weather.weather[0].description)}</p>
                             <p>{formatLocalDate(weather.dt, weather.timezone)} | {formatLocalTime(weather.dt, weather.timezone)}hs</p>
                         </div>
+
+                        {forecast.length > 0 ? 
+                            <ListForecast forecast={forecast}/>
+                            : 
+                            null
+                        }
 
                         <div className={style.datum}>
                             
