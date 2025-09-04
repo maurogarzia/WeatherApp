@@ -43,10 +43,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 50px;
-}
-.containerHour{
-    height: 30px;
+    height: 70px;
 }
 .sun{
     display: flex;

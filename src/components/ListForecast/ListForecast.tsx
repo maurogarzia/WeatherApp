@@ -10,6 +10,7 @@ interface IListForecast {
 export const ListForecast : FC<IListForecast> = ({forecast}) => {
 
     
+    
     return (
         <div className={style.containerPrincipal}>
             <div className={style.title}>
@@ -25,49 +26,36 @@ export const ListForecast : FC<IListForecast> = ({forecast}) => {
 
                         <div className={style.containerData}>
                             
-                            {/* despejado */}
-                            {day.weather[0].description.includes('claro') && 
+                             {/* despejado */}
+                            {day.weather?.description.includes("claro") && 
                                 <div className={style.sun}></div>
                             }
 
                             {/* nublado */}
-                            {(day.weather[0].description.includes('nubes') || day.weather[0].description.includes('nuboso')) &&
+                            {(day.weather?.description.includes('nubes') || day.weather?.description.includes('nuboso')) &&
                                 <div className={style.icon}>
                                     <span className="material-symbols-outlined">partly_cloudy_day</span>
                                 </div>
                             }
 
                             {/* lluvioso */}
-                            {day.weather[0].description.includes('lluvia') && 
+                            {day.weather?.description.includes('lluvia') && 
                                 <div className={style.icon}>
                                     <span className="material-symbols-outlined">rainy_heavy</span>
                                 </div>
                             }
 
-                            {/* Niebla */}
-                            {(day.weather[0].description.includes('niebla') || day.weather[0].description.includes('neblina')) && 
+                            {/* niebla */}
+                            {(day.weather?.description.includes('niebla') || day.weather?.description.includes('neblina')) && 
                                 <div className={style.icon}>
                                     <span className="material-symbols-outlined">foggy</span>
                                 </div>
                             }
 
-                            {/* Tormenta */}
-                            {day.weather[0].description.includes('tormenta') && 
-                                <div className={style.icon}>
-                                    <span className="material-symbols-outlined">rainy</span>
-                                </div>
-                            }
-
-                            {/* Nieve */}
-                            {day.weather[0].description.includes('nieve') &&
-                                <div className={style.icon}>
-                                    <span className="material-symbols-outlined">ac_unit</span>
-                                </div>
-                            }
-
 
                             
-                            <p>{Math.round(day.main.temp)}°</p>
+                            <p>Min: {Math.round(day.min)}°</p>
+                            <p>Max: {Math.round(day.max)}°</p>
                         </div>
 
                         <div className={style.containerHour}>

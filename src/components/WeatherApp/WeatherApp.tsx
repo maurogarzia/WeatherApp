@@ -34,8 +34,32 @@ export const WeatherApp = () => {
                 console.log("error al obtener el pronostico");
             }
 
-            const listForecast = data.list.filter((item : any) => item.dt_txt.includes("12:00:00"))
+            // Agrupar por dia
+
+            const dailyData: {[key: string]: any[]} = {}
+            data.list.forEach((item: any) => {
+                const date = item.dt_txt.split(" ")[0] // Fecha
+                if (!dailyData[date]) dailyData[date] = []
+                dailyData[date].push(item)
+            })
             
+            // calculo minima y maxima, y uso la descripcion del mediodia
+
+            const listForecast = Object.entries(dailyData).map(([date, items]) => {
+                const temps = items.map((i : any) => i.main.temp)
+                const min = Math.min(...temps) // minimo
+                const max = Math.max(...temps) // maximo
+
+                const noonWeather = items.find((i:any) => i.dt_txt.includes("12:00:00") || items[0]) // Agarro la descripcion del mediodia, sino la primera que encuentre
+
+                return {
+                    date, 
+                    min,
+                    max,
+                    weather : noonWeather.weather[0],
+                }
+            })
+
             setForecast(listForecast)
         } catch (error) {
             console.log("Ocurrió un error al ver el pronostico");
