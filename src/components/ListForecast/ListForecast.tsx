@@ -21,7 +21,7 @@ export const ListForecast : FC<IListForecast> = ({forecast}) => {
                 {forecast.map((day, index) => (
                     <div key={index} className={style.forecast}>
                         <div className={style.containerDay}>
-                            <p>{new Date(day.dt*1000).toLocaleDateString("es-Es", {weekday: "long"})}</p>
+                            <p>{new Date(day.date).toLocaleDateString("es-ES", { weekday: "long" })}</p>
                         </div>
 
                         <div className={style.containerData}>
