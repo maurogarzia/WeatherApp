@@ -58,9 +58,6 @@ export const ListForecast : FC<IListForecast> = ({forecast}) => {
                             <p>Max: {Math.round(day.max)}°</p>
                         </div>
 
-                        <div className={style.containerHour}>
-                            <p>12:00hs</p>
-                        </div>
                     </div>
                 ))}
                 
